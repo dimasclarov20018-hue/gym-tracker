@@ -7,3 +7,5 @@ window.GYM_FIREBASE_CONFIG = {
   messagingSenderId: "319043574090",
   appId: "1:319043574090:web:00294159c596e2e728c9b3"
 };
+
+window.GYM_FRIENDS_OWNER_UID = 'sP0tZyJAXGXTDzGWBWbun41j9w42';
