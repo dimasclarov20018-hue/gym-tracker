@@ -1,6 +1,6 @@
 // Gym Tracker v1.6: offline app shell; user data lives in the browser database.
-const CACHE = 'gym-tracker-shell-v2-1';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon.svg'];
+const CACHE = 'gym-tracker-shell-v2-2';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon.svg', './firebase-config.js'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil((async () => {
   for (const key of await caches.keys()) if (key.startsWith('gym-tracker-') && key !== CACHE) await caches.delete(key);

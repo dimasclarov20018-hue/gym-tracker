@@ -1,0 +1,14 @@
+Gym Tracker v2.2, optional cloud backup
+1. Open https://console.firebase.google.com and create a project (Spark plan).
+2. Add a Web app; copy the firebaseConfig object values into firebase-config.js:
+   window.GYM_FIREBASE_CONFIG = { apiKey: "...", authDomain: "...", projectId: "...", appId: "..." };
+3. Authentication > Sign-in method > Google > Enable.
+4. Authentication > Settings > Authorized domains > add YOUR-USERNAME.github.io (do not add the URL path).
+5. Sign in to Gym Tracker once. Firebase console > Authentication > Users: copy YOUR UID.
+6. Firestore Database > Create database (production mode, default database). In firestore.rules replace REPLACE_WITH_OWNER_UID with your UID. Set Rules tab to this content, then Publish.
+   Only this UID can use the cloud database; friends stay local.
+6. Upload all files to the root of your GitHub Pages repository, Commit, reload the PWA.
+7. Data > Sign in with Google > Save cloud copy. On another device, sign in and choose Restore.
+IMPORTANT: This is manual backup/restore, NOT automatic bidirectional sync. Restore overwrites all local data. Download JSON before restoration.
+Friends can ignore the login and keep using local-only mode. Firestore security rules isolate signed-in users by uid.
+Do not commit private admin keys or service-account JSON files to public GitHub. firebase-config.js is client config, not a secret.
