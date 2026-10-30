@@ -21,3 +21,5 @@ GYM TRACKER v1.6 — PWA для GitHub Pages
 Gym Tracker v1.7: mobile UI improvement. Bottom navigation is horizontally scrollable; scroll to reach all sections. Update files on GitHub and commit changes.
 
 Gym Tracker v2.1: звук таймера в активному застосунку, обхвати тіла з умовами вимірювання, усі дані локальні. Для друзів достатньо того самого URL, їхнє сховище окреме.
+
+Gym Tracker v2.4: параметри тіла доповнені передпліччям; литка перейменована на гомілку. Чернетка триває після опівночі, не завершується без підтвердження.
