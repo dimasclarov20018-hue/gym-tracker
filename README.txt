@@ -1,0 +1,19 @@
+GYM TRACKER v1.6 — PWA для GitHub Pages
+
+Вміст ЦІЄЇ папки завантажте в корінь публічного GitHub-репозиторію (не саму папку gym-tracker).
+
+1. github.com → New repository → gym-tracker → Public → Create repository.
+2. Відкрийте репозиторій → Add file → Upload files.
+3. Перетягніть index.html, manifest.webmanifest, sw.js, icon.svg, icon-192.png, icon-512.png, .nojekyll (прихований файл можна пропустити).
+4. Commit changes.
+5. Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main, /(root) → Save.
+6. Перейдіть за посиланням https://ВАШ-ЛОГІН.github.io/gym-tracker/ (якщо назва репозиторію gym-tracker).
+7. Android Samsung S24+: відкрити URL у Chrome → меню ⋮ → Встановити застосунок / Додати на головний екран.
+8. Windows: відкрити URL у Chrome або Edge → меню → Встановити Gym Tracker (як застосунок).
+
+ПЕРЕВІРКА ОФЛАЙН: уперше відкрийте застосунок з інтернетом, потім вимкніть інтернет і знову відкрийте іконку.
+ВАЖЛИВО: дані з file://, localhost і github.io — РІЗНІ сховища. Старі тестові записи автоматично НЕ з'являться на новому сайті. За потреби експортуйте JSON у старій версії та імпортуйте на новій.
+Дані залишаються локально у сховищі браузера цього пристрою. Синхронізації між Android і Windows ще НЕМАЄ. Якщо видалити дані сайту чи застосунок разом із його даними, історія може зникнути.
+Не завантажуйте приватні JSON-резервні копії чи особисті дані до публічного GitHub-репозиторію.
+
+Встановлення PWA залежить від можливостей та налаштувань конкретного браузера.
