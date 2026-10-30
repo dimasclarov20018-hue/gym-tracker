@@ -3,13 +3,19 @@ service cloud.firestore {
   match /databases/{database}/documents {
     // Replace the exact UID below with YOUR Firebase Authentication UID.
     function isOwner() {
-      return request.auth != null && request.auth.uid == 'REPLACE_WITH_OWNER_UID';
+      return request.auth != null && request.auth.uid == 'sP0tZyJAXGXTDzGWBWbun41j9w42';
     }
-    function isMember() {
-      return request.auth != null && (
-        isOwner() || exists(/databases/$(database)/documents/gymFriends/main/members/$(request.auth.uid))
-      );
-    }
+ 
+function isMember() {
+  return request.auth != null && (
+    isOwner() ||
+    (
+      exists(/databases/$(database)/documents/gymFriends/main/members/$(request.auth.uid)) &&
+      get(/databases/$(database)/documents/gymFriends/main/members/$(request.auth.uid)).data.enabled == true
+    )
+  );
+}
+
     // Your existing manual backups and automatic sync are private to the owner only.
     match /users/{userId}/backups/{backupId} {
       allow read, write: if isOwner() && userId == request.auth.uid;
