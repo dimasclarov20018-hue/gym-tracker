@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Replace the exact UID below with YOUR Firebase Authentication UID.
+    function isOwner() {
+      return request.auth != null && request.auth.uid == 'REPLACE_WITH_OWNER_UID';
+    }
+    function isMember() {
+      return request.auth != null && (
+        isOwner() || exists(/databases/$(database)/documents/gymFriends/main/members/$(request.auth.uid))
+      );
+    }
+    // Your existing manual backups and automatic sync are private to the owner only.
+    match /users/{userId}/backups/{backupId} {
+      allow read, write: if isOwner() && userId == request.auth.uid;
+    }
+    match /gymFriends/main/members/{memberId} {
+      allow read: if isMember();
+      allow create, update, delete: if isOwner()
+        && memberId.matches('^[a-zA-Z0-9_-]{15,128}$')
+        && (request.method == 'delete' || request.resource.data.keys().hasOnly(['enabled', 'joinedAt']));
+    }
+    match /gymFriends/main/records/{memberId} {
+      allow read: if isMember();
+      allow create, update: if isMember() && request.auth.uid == memberId
+        && request.resource.data.keys().hasOnly(['nickname','sessions','activeDays','setsDone','records','updatedAt'])
+        && request.resource.data.nickname is string
+        && request.resource.data.nickname.size() <= 32
+        && request.resource.data.sessions is int && request.resource.data.sessions >= 0
+        && request.resource.data.activeDays is int && request.resource.data.activeDays >= 0
+        && request.resource.data.setsDone is int && request.resource.data.setsDone >= 0
+        && request.resource.data.records is list && request.resource.data.records.size() <= 100
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if isOwner() || (isMember() && request.auth.uid == memberId);
+    }
+  }
+}
