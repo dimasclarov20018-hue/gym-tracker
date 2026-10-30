@@ -31,6 +31,46 @@ input,select{border-color:#314158;background:#0b1421;border-radius:11px;min-heig
 
 /* Achievements v1.4 */
 .insight-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-bottom:20px}.insight-card{border:1px solid #2c4059;border-radius:15px;padding:16px;background:linear-gradient(145deg,#17263b,#111c2b)}.insight-card .cap{font-size:12px;color:#a5b8d1}.insight-card .big{display:block;font-size:26px;font-weight:800;margin:6px 0}.calendar-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.calendar-day{min-height:46px;border-radius:10px;padding:7px 3px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1px solid #253449;color:#b9c9db;background:#111c2a;font-variant-numeric:tabular-nums}.calendar-day.done{background:linear-gradient(160deg,#204f50,#17383e);border-color:#3a877e;color:#dcfff5;font-weight:700}.calendar-day.today{outline:2px solid #9ac5ff;outline-offset:-2px}.calendar-day.outside{opacity:.25}.calendar-day .dot{width:4px;height:4px;background:#91e7ca;border-radius:50%;margin-top:3px}.calendar-head{text-align:center;font-size:11px;color:#8ea2ba;padding:7px 0}.insight-list{display:grid;gap:9px}.insight-record{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px;border:1px solid #273a52;background:#111e2d;border-radius:11px}.insight-record small{display:block;margin-top:4px}.compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.compare-box{padding:13px;border:1px solid #304057;background:#111c2a;border-radius:12px}.compare-box strong{font-size:22px;display:block;margin:5px 0}@media(max-width:550px){.insight-cards{grid-template-columns:1fr 1fr}.insight-card{padding:12px}.insight-card .big{font-size:22px}.calendar-day{min-height:39px}.compare-grid{grid-template-columns:1fr}}
+
+/* v1.7: mobile-first refinement */
+@media(max-width:700px){
+  html{scroll-padding-bottom:100px}
+  body{background:#090e16}
+  .shell{padding:0 16px calc(112px + env(safe-area-inset-bottom));max-width:100%;overflow-x:hidden}
+  header{padding:24px 1px 22px;margin-bottom:21px;align-items:center}
+  header h1{font-size:29px;letter-spacing:-1.1px}
+  header .brand{font-size:10px;letter-spacing:2.2px}
+  #dateLabel{white-space:nowrap;font-size:12px;padding:8px 10px}
+  .tabs{position:fixed;left:0;right:0;bottom:0;display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:8px;
+    width:100%;height:auto;max-height:calc(79px + env(safe-area-inset-bottom));
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;
+    padding:10px 14px calc(11px + env(safe-area-inset-bottom));border:0;border-top:1px solid #2b3b50;
+    border-radius:20px 20px 0 0;background:#111a28fa;box-shadow:0 -14px 35px #0008;
+    scrollbar-width:thin;scrollbar-color:#3d536e transparent;z-index:20}
+  .tabs button{flex:0 0 auto;min-width:92px;min-height:47px;padding:11px 12px;
+    font-size:12px;line-height:1.2;white-space:nowrap;scroll-snap-align:center;
+    border:1px solid #28374d;border-radius:13px;color:#b3c1d5;background:#162234}
+  .tabs button.selected{background:#a4c5ff;color:#0d192a;border-color:#a4c5ff}
+  main{min-width:0}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .grid>.tile:last-child:nth-child(odd){grid-column:1/-1}
+  .tile{min-height:112px;padding:17px 15px;border-radius:17px;font-size:13px;line-height:1.4;overflow-wrap:normal}
+  .tile strong{font-size:27px;letter-spacing:-.6px;margin-top:14px}
+  .panel{border-radius:20px;padding:21px 18px;margin:15px 0;box-shadow:none}
+  .panel h2{font-size:21px}
+  .hero-title{font-size:27px;margin:8px 0}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .hero-actions button{min-height:54px;font-size:13px;line-height:1.35;padding:12px 9px;white-space:normal}
+  .empty{font-size:13px;padding:24px 13px;line-height:1.6}
+  .analytics-controls{grid-template-columns:1fr 1fr;gap:9px}
+  .analytics-controls>div:first-child{grid-column:1/-1}
+  .metric-row{gap:7px}.metric{padding:11px 9px}.metric strong{font-size:19px}
+  input,select{font-size:16px} .set input{font-size:16px}
+  footer{line-height:1.5;font-size:11px;margin-top:26px;padding:15px 0}
+  .stickyfinish{bottom:81px}
+}
+@media(max-width:380px){.shell{padding-left:12px;padding-right:12px}.panel{padding:17px 13px}.tile{padding:13px 11px}.tabs button{min-width:88px}}
+
 </style></head><body><div class="shell"><header><div><div class="brand">PERSONAL TRAINING LOG</div><h1>Gym Tracker <span style="color:#8db8ff">●</span></h1></div><div class="muted" id="dateLabel"></div></header><nav class="tabs" id="tabs"></nav><main id="app"></main><footer>Локальне зберігання на пристрої · Хмарна синхронізація ще не підключена.</footer></div><input id="importFile" class="hidden" type="file" accept="application/json,.json"><script>
 'use strict';const KEY='gym-tracker-v1';const DRAFTKEY='gym-tracker-active-v1';const DAYS=['Нд','Пн','Вт','Ср','Чт','Пт','Сб'];const FULL=['Неділя','Понеділок','Вівторок','Середа','Четвер','П’ятниця','Субота'];const uid=()=>crypto.randomUUID?crypto.randomUUID():'id-'+Date.now()+'-'+Math.random().toString(36).slice(2);const today=()=>new Date().toLocaleDateString('en-CA');const blank=()=>({version:1,templates:[],sessions:[]});let state;try{state=JSON.parse(localStorage.getItem(KEY))||blank();if(!Array.isArray(state.templates)||!Array.isArray(state.sessions))throw Error()}catch(e){state=blank();alert('Не вдалося прочитати збережені дані. За наявності резервної копії імпортуй її у налаштуваннях.')}let tab='home',editDay=new Date().getDay(),active=null;try{const draft=JSON.parse(localStorage.getItem(DRAFTKEY));if(draft&&Array.isArray(draft.exercises)&&draft.id)active=draft}catch(_){}// v1.5: keep backward-compatible localStorage and a second device-local IndexedDB copy.
 // Cloud syncing is deliberately NOT enabled. Data remains on this browser/device.

@@ -17,3 +17,5 @@ GYM TRACKER v1.6 — PWA для GitHub Pages
 Не завантажуйте приватні JSON-резервні копії чи особисті дані до публічного GitHub-репозиторію.
 
 Встановлення PWA залежить від можливостей та налаштувань конкретного браузера.
+
+Gym Tracker v1.7: mobile UI improvement. Bottom navigation is horizontally scrollable; scroll to reach all sections. Update files on GitHub and commit changes.
